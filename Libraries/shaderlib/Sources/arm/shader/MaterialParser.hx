@@ -527,15 +527,11 @@ class MaterialParser {
 			
 			var angle = parse_value_input(node.inputs[1], true);
 			var mask = parse_value_input(node.inputs[2], true);
-			
-			var tex_name = "texwarp_" + node_name(node);			
+			var tex_name = "texwarp_" + node_name(node);
 			curshader.add_uniform("sampler2D " + tex_name, "_" + tex_name);
-			curshader.write('float x = cos($angle * ${Math.PI} / 180);');
-			curshader.write('float y = sin($angle * ${Math.PI} / 180);');
-			curshader.write('vec3 res1 = vec3(0.0, 0.0, 0.0);');
-			curshader.write('res1 = texture($tex_name, texCoord + vec2(x, y) * $mask).rgb;');
-
-			return "res1;";
+			
+			curshader.add_function(ShaderFunctions.str_direct_warp);
+			return 'direct_warp($angle, ${Math.PI}, $mask, texCoord, texturePass($tex_name));';
 		}
 
 		else if (node.type == "BLUR") {
