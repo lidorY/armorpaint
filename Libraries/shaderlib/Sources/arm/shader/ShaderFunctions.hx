@@ -2,7 +2,6 @@ package arm.shader;
 
 class ShaderFunctions {
 
-
 	public static var str_direct_warp = "
 vec3 direct_warp(const float angle_deg, const float pi_val, const float mask, vec2 texCoord, textureArg(tex_name)) {
 	float x = cos(angle_deg * pi_val / 180);
@@ -10,7 +9,6 @@ vec3 direct_warp(const float angle_deg, const float pi_val, const float mask, ve
 	return texture(tex_name, texCoord + vec2(x, y) * mask).rgb;
 }
 ";
-
 
 	public static var str_tex_checker = "
 vec3 tex_checker(const vec3 co, const vec3 col1, const vec3 col2, const float scale) {
